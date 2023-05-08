@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     Rigidbody2D r2d;
     float moveH;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         moveH = Input.GetAxis("Horizontal");
         r2d.velocity = new Vector2(moveH*velocity, r2d.velocity.y);
         if (Input.GetKey(KeyCode.Space) && canJump)
