@@ -17,7 +17,7 @@ public class PlayerController : NetworkBehaviour
         r2d = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
         if (!IsOwner) return;
