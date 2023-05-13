@@ -5,11 +5,13 @@ using Unity.Netcode;
 
 public class PlayerController : NetworkBehaviour
 {
+    
     Rigidbody2D r2d;
     float moveH;
     [SerializeField] private float velocity;
     [SerializeField] private float jumpForce;
-    bool canJump = true;    
+    bool canJump = true;
+    private NetworkVariable<int> randomNumber;
     void Start()
     {
         r2d = GetComponent<Rigidbody2D>();
