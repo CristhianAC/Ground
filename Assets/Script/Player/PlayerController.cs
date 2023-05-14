@@ -11,7 +11,7 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float velocity;
     [SerializeField] private float jumpForce;
     bool canJump = true;
-    private NetworkVariable<int> randomNumber;
+    private NetworkVariable<int> randomNumber = new NetworkVariable<int>(1);
     void Start()
     {
         r2d = GetComponent<Rigidbody2D>();
@@ -20,6 +20,11 @@ public class PlayerController : NetworkBehaviour
     
     void Update()
     {
+        Debug.Log(OwnerClientId +"; randomNumber: " + randomNumber.Value);
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            randomNumber.Value = Random.Range(0,100);
+        }
         if (!IsOwner) return;
         moveH = Input.GetAxis("Horizontal");
         r2d.velocity = new Vector2(moveH*velocity, r2d.velocity.y);
