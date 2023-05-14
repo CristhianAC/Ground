@@ -135,9 +135,9 @@ GameObject:
   - component: {fileID: 336800911}
   - component: {fileID: 336800910}
   - component: {fileID: 336800909}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -970,10 +970,10 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1970072598}
-    PlayerPrefab: {fileID: 4235125739981304247, guid: a22c8bde19841c748a33c632d9d73e50, type: 3}
+    PlayerPrefab: {fileID: 4107353685311248167, guid: 8dc5041f762610845bbf10494c849ccf, type: 3}
     Prefabs:
       NetworkPrefabsLists:
-      - {fileID: 11400000, guid: 62ca54c78a17d6b4791bc21784639e57, type: 2}
+      - {fileID: 11400000, guid: ae8340a86c7ecb0489068f404373b6a1, type: 2}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 0
