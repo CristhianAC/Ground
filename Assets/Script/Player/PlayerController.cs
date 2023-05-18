@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using Mono.Cecil.Cil;
+using Unity.Collections;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -12,7 +13,12 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float velocity;
     [SerializeField] private float jumpForce;
     
-    private NetworkVariable<int> randomNumber = new NetworkVariable<int>(1);
+    private NetworkVariable<MyCustomData> randomNumber = new NetworkVariable<MyCustomData>(
+        new MyCustomData { 
+            _int = 56,
+            _bool = true,
+        }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+
     private Animator anim; 
     bool _facingRight = true;
 
@@ -20,21 +26,50 @@ public class PlayerController : NetworkBehaviour
     public float groundCheckRadius;
     public LayerMask layerMask;
     private bool _isGrounded;
+
+    
     void Start()
     {
         r2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
 
-    
+    public struct MyCustomData : INetworkSerializable{
+        public int _int;
+        public bool _bool;
+        public FixedString128Bytes message;
+
+        public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+        {
+            serializer.SerializeValue(ref _int);
+            serializer.SerializeValue(ref _bool);
+            serializer.SerializeValue(ref message);
+        }
+    }
+
+    public override void OnNetworkSpawn()
+    {
+        randomNumber.OnValueChanged += (MyCustomData previousValue, MyCustomData newValue) =>
+        {
+            Debug.Log(OwnerClientId + "; " + newValue._int + "; " + newValue._bool + "; " + newValue.message);
+        };
+    }
     void Update()
     {
-        Debug.Log(OwnerClientId +"; randomNumber: " + randomNumber.Value);
+        if (!IsOwner) return;
+
         if (Input.GetKeyDown(KeyCode.T))
         {
-            randomNumber.Value = Random.Range(0,100);
+            TestServerRpc(new ServerRpcParams());
+            /*
+            randomNumber.Value = new MyCustomData { 
+                _int = 10,
+                _bool = false,
+                message = "Me la pelan"
+            };
+            */
         }
-        if (!IsOwner) return;
+        
         moveH = Input.GetAxis("Horizontal");
         r2d.velocity = new Vector2(moveH*velocity, r2d.velocity.y);
         if (Input.GetButtonDown("Jump") && _isGrounded)
@@ -52,6 +87,12 @@ public class PlayerController : NetworkBehaviour
         }
 
         _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, layerMask);
+    }
+
+    [ServerRpc]
+    private void TestServerRpc(ServerRpcParams serverRpcParams) { 
+        Debug.Log("TestServerRpc" + OwnerClientId + "; " + serverRpcParams.Receive.SenderClientId);
+
     }
     private void LateUpdate()
     {
