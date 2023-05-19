@@ -5,6 +5,7 @@ using Unity.Netcode;
 using UnityEngine.UI;
 using Unity.Netcode.Transports.UTP;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 public class NetworkManagerUI : MonoBehaviour
 {
@@ -24,6 +25,7 @@ public class NetworkManagerUI : MonoBehaviour
         switch(gameState)
         {
             case ManagerGame.State.Game:
+                
                 HidePanel();
                 
                 break; 
@@ -43,7 +45,8 @@ public class NetworkManagerUI : MonoBehaviour
         
         UnityTransport utp = NetworkManager.Singleton.GetComponent<UnityTransport>();
         utp.SetConnectionData(ipAddress, 7777);
-        
+        Time.timeScale = 1f;
+        hideLeader();
         NetworkManager.Singleton.StartClient();
         
         
@@ -57,5 +60,28 @@ public class NetworkManagerUI : MonoBehaviour
     {
         var Menu = GameObject.Find("MenuIP");
         Menu.SetActive(false);
+    }
+    void hideLeader()
+    {
+        try
+        {
+            var Menu = GameObject.Find("LeaderBoard");
+            Menu.SetActive(false);
+        }
+        catch
+        {
+
+        }
+        
+    }
+    public void changeScene()
+    {
+        hideLeader();
+        SceneManager.LoadScene("menu");
+        
+    }
+    public void exit()
+    {
+        Application.Quit();
     }
 }

@@ -5,11 +5,11 @@ using Unity.Netcode;
 using Mono.Cecil.Cil;
 using Unity.Collections;
 using Unity.Netcode.Components;
-
+using UnityEngine.UI;
 public class PlayerController : NetworkBehaviour
 {
-    
 
+    Text Score;
     Rigidbody2D r2d;
     float moveH;
     [SerializeField] private float velocity;
@@ -17,7 +17,7 @@ public class PlayerController : NetworkBehaviour
     
     private Animator anim; 
     bool _facingRight = true;
-
+    public float point = 0;
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask layerMask;
@@ -55,6 +55,7 @@ public class PlayerController : NetworkBehaviour
         if (!IsOwner) return;
         r2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        Score = GameObject.Find("Score").GetComponent<Text>();
     }
 
 
@@ -62,6 +63,7 @@ public class PlayerController : NetworkBehaviour
     void Update()
     {
         if (!IsOwner) return;
+        Score.text = point.ToString();
         
         moveH = Input.GetAxis("Horizontal");
         r2d.velocity = new Vector2(moveH*velocity, r2d.velocity.y);
@@ -71,7 +73,7 @@ public class PlayerController : NetworkBehaviour
             r2d.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             
         }
-        
+        Debug.Log(point);
         if (moveH > 0 && !_facingRight )
         {
             flip();
@@ -83,6 +85,11 @@ public class PlayerController : NetworkBehaviour
             anim.SetTrigger("Punch");
         }
         _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, layerMask);
+    }
+    void finish()
+    {
+        if (!IsOwner) return;
+        
     }
 
     private void LateUpdate()
@@ -105,5 +112,15 @@ public class PlayerController : NetworkBehaviour
         float localScaleX = transform.localScale.x;
         localScaleX = localScaleX * -1f;
         transform.localScale = new Vector3(localScaleX, transform.localScale.y, transform.localScale.z);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+        if (collision.gameObject.CompareTag("Player") && anim.GetCurrentAnimatorStateInfo(0).IsTag("Punch"))
+        {
+
+            if (playerController.NetworkObjectId != this.NetworkObjectId)
+                point += 50;
+        }
     }
 }

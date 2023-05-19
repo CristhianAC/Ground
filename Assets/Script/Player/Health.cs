@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.Networking;
 
 
 public class Health : NetworkBehaviour
 {
-    [SyncVar] float health = 0;
-    [SyncVar] float maxHealth = 3f;
+     float health = 0;
+     float maxHealth = 3f;
 
     private void Start()
     {
