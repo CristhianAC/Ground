@@ -9,7 +9,9 @@ using UnityEngine.SceneManagement;
 
 public class NetworkManagerUI : MonoBehaviour
 {
-    [SerializeField]GameObject text; 
+    [SerializeField]GameObject text;
+    [SerializeField] GameObject leader;
+    
     private void Start()
     {
         ShowConnection();
@@ -63,15 +65,7 @@ public class NetworkManagerUI : MonoBehaviour
     }
     void hideLeader()
     {
-        try
-        {
-            var Menu = GameObject.Find("LeaderBoard");
-            Menu.SetActive(false);
-        }
-        catch
-        {
-
-        }
+        leader.SetActive(false);
         
     }
     public void changeScene()

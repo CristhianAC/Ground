@@ -1294,6 +1294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 147717353}
+  leader: {fileID: 1349127305}
 --- !u!4 &1323194369
 Transform:
   m_ObjectHideFlags: 0
@@ -1309,6 +1310,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1349127305 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5633133513834004108, guid: e19b7ed1e9b0ca846a930d2010b1840f, type: 3}
+  m_PrefabInstance: {fileID: 1129240705}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1445442586
 GameObject:
   m_ObjectHideFlags: 0
