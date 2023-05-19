@@ -3,26 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
 using UnityEngine.UI;
+using Unity.Netcode.Transports.UTP;
 
 public class NetworkManagerUI : MonoBehaviour
 {
-    [SerializeField] private Button Host;
-    [SerializeField] private Button Server;
-    [SerializeField] private Button Client;
-
-    private void Awake()
+    public void HostButtonCallBack()
     {
-        Server.onClick.AddListener(() =>
-        { NetworkManager.Singleton.StartServer();
-        });
-        Host.onClick.AddListener(() =>
-        {
-            NetworkManager.Singleton.StartHost();
+        NetworkManager.Singleton.StartHost();
 
-        });
-        Client.onClick.AddListener(() =>
-        {
-            NetworkManager.Singleton.StartClient();
-        });
+    }
+    public void ClientButtonCallBack()
+    {
+        string ipAddress = IPAddress.instance.GetInputIP();
+
+        UnityTransport utp = NetworkManager.Singleton.GetComponent<UnityTransport>();
+        utp.SetConnectionData(ipAddress, 7777);
+
+        NetworkManager.Singleton.StartClient();
     }
 }

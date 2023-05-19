@@ -8,17 +8,15 @@ using Unity.Netcode.Components;
 
 public class PlayerController : NetworkBehaviour
 {
-    
+    [Header(" Elements ")]
+    [SerializeField] private SpriteRenderer[] renderers;
+
     Rigidbody2D r2d;
     float moveH;
     [SerializeField] private float velocity;
     [SerializeField] private float jumpForce;
     
-    private NetworkVariable<MyCustomData> randomNumber = new NetworkVariable<MyCustomData>(
-        new MyCustomData { 
-            _int = 56,
-            _bool = true,
-        }, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    
 
     private Animator anim; 
     bool _facingRight = true;
@@ -27,8 +25,31 @@ public class PlayerController : NetworkBehaviour
     public float groundCheckRadius;
     public LayerMask layerMask;
     private bool _isGrounded;
-    
 
+
+    public override void OnNetworkSpawn()
+    {
+        base.OnNetworkSpawn();
+
+        if (!IsServer && IsOwner)
+            ColorizeServerRpc(Color.red);
+
+    }
+
+    [ServerRpc]
+    private void ColorizeServerRpc(Color color)
+    {
+        ColorizeClientRpc(color);
+    }
+
+    [ClientRpc]
+    private void ColorizeClientRpc(Color color)
+    {
+        foreach (SpriteRenderer renderer in renderers)
+        {
+            renderer.color = color;
+        }
+    }
 
     void Start()
     {
@@ -36,18 +57,6 @@ public class PlayerController : NetworkBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public struct MyCustomData : INetworkSerializable{
-        public int _int;
-        public bool _bool;
-        public FixedString128Bytes message;
-
-        public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
-        {
-            serializer.SerializeValue(ref _int);
-            serializer.SerializeValue(ref _bool);
-            serializer.SerializeValue(ref message);
-        }
-    }
 
     
     void Update()
@@ -74,11 +83,6 @@ public class PlayerController : NetworkBehaviour
         _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, layerMask);
     }
 
-    [ServerRpc]
-    private void TestServerRpc(ServerRpcParams serverRpcParams) { 
-        Debug.Log("TestServerRpc" + OwnerClientId + "; " + serverRpcParams.Receive.SenderClientId);
-
-    }
     private void LateUpdate()
     {
         if(moveH != 0) {

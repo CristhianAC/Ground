@@ -319,9 +319,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1080727673}
-        m_TargetAssemblyTypeName: ForButtons, Assembly-CSharp
-        m_MethodName: StartClient
+      - m_Target: {fileID: 1323194368}
+        m_TargetAssemblyTypeName: NetworkManagerUI, Assembly-CSharp
+        m_MethodName: ClientButtonCallBack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -477,6 +477,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &992085941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 992085942}
+  - component: {fileID: 992085943}
+  m_Layer: 0
+  m_Name: IP Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &992085942
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992085941}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 665.88574, y: 311.23306, z: -15.584337}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &992085943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992085941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15daae406d0282647a6f40a578ddc29c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ipText: {fileID: 1631883465}
+  ipInputField: {fileID: 2090957793}
 --- !u!1 &1080727668
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,7 +691,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1080727674}
-    PlayerPrefab: {fileID: 0}
+    PlayerPrefab: {fileID: 4107353685311248167, guid: 8dc5041f762610845bbf10494c849ccf, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: ae8340a86c7ecb0489068f404373b6a1, type: 2}
@@ -681,7 +727,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1323194368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -694,9 +740,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43c5ee04507747c4e85860475627e991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Host: {fileID: 1786410761}
-  Server: {fileID: 1916290712}
-  Client: {fileID: 485573976}
 --- !u!4 &1323194369
 Transform:
   m_ObjectHideFlags: 0
@@ -1198,9 +1241,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1080727673}
-        m_TargetAssemblyTypeName: ForButtons, Assembly-CSharp
-        m_MethodName: StartHost
+      - m_Target: {fileID: 1323194368}
+        m_TargetAssemblyTypeName: NetworkManagerUI, Assembly-CSharp
+        m_MethodName: HostButtonCallBack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1488,7 +1531,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1970072597
 Transform:
   m_ObjectHideFlags: 0
