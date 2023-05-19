@@ -6,6 +6,13 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/menu.unity
+    guid: af2e35137b85caa42ba6c5dae7b29bf9
+  - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 14a14c49e5b1c704b92634c159532c5e
+  - enabled: 1
+    path: Assets/Carter Games/Leaderboard Manager/Demo/Scenes/Leaderboard Manager
+      Demo Scene.unity
+    guid: d797af8310bf03b4cadf46e2b9eac96f
   m_configObjects: {}
