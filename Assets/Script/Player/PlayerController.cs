@@ -78,7 +78,10 @@ public class PlayerController : NetworkBehaviour
         }else if (moveH < 0 && _facingRight) {
             flip();
         }
-
+        if (Input.GetKey(KeyCode.K) && _isGrounded)
+        {
+            anim.SetTrigger("Punch");
+        }
         _isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, layerMask);
     }
 
@@ -92,7 +95,8 @@ public class PlayerController : NetworkBehaviour
         {
             anim.SetBool("Walking", false);
         }
-
+        anim.SetFloat("verticalVelocity", r2d.velocity.y);
+        anim.SetBool("isGrounded", _isGrounded);
     }
     
     void flip() {
