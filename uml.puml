@@ -1,0 +1,123 @@
+@startuml
+!theme toy
+package Sockets {
+  class NetworkManager {
+    - serverIP: string
+    - serverPort: int
+    
+    +HostButtonCallBack(): void
+    +ClientButtonCallBack(): void
+    +ShowConnection(): void
+    +HidePanel(): void
+    +HideLeader(): void
+    +changeScene(): void
+    +Exit(): void
+
+    
+  }
+  
+  class ManagerGame {
+    -State: enum
+    -ConectedPlayers: int
+    -timer: Timer
+    
+    
+    +OnNetworkSpawn(): override void
+    +OnDestroy(): override void
+    +NetworkManager_OnServerStarted(): void
+    +Singleton_OnClientConnectedCallback(): void
+    
+    
+    
+  }
+  
+  class PlayerSpawner {
+    
+    +SpawnPlayerServerRpc(): void
+    
+    }
+    
+    
+  
+  class ForButtoms {
+
+    - ipAddress: String
+    
+    +StartClient(): void
+    +GetLocalIPAddress(): string
+    +SetIpAddress(): void
+    +assignPlayerController(): void
+    
+    
+    
+  }
+
+ForButtoms *-- PlayerSpawner
+NetworkManager --> ManagerGame: Manages
+ForButtoms *-- NetworkManager
+ManagerGame *-- ForButtoms
+ManagerGame *-- NetworkManager
+ManagerGame *-- PlayerSpawner
+
+
+}
+
+package Demo{
+
+  class InitialMenu{
+  
+  -play = Button
+  -exit = Button
+  -leaderboard = Button
+  
+  +PlayButton(): void
+  +ExitButton(): void
+  +LeaderboardButton(): void
+
+  
+  }
+  
+  class RunGame {
+  
+  -host = Button
+  -ip= Input
+  
+  
+  +HostButton(): void
+  +ClientButton(): void
+  
+  }
+  
+  class Player {
+  
+  -points = Int
+  -anims= Animations
+  
+  +Colitions(): void
+
+  }
+  
+  
+  
+  class Leaderboard {
+  
+  -name: String
+  -score: Int
+  
+  +Update(): void
+  +ClearData(): void
+      
+  }
+  
+  InitialMenu *-- RunGame
+  RunGame *-- Player
+  Player *-- Leaderboard
+
+}
+
+
+
+Sockets *-- Demo
+
+
+@enduml
