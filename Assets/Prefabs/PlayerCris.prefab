@@ -141,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 10
   jumpForce: 12
-  health: 4
+  point: 0
   groundCheck: {fileID: 955055423}
   groundCheckRadius: 0.025
   layerMask:
@@ -321,9 +321,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.4760811, y: 0}
+  m_Offset: {x: 1.122031, y: 0.016340613}
   serializedVersion: 2
-  m_Radius: 0.5214741
+  m_Radius: 0.75024486
 --- !u!1 &7904153300930565747
 GameObject:
   m_ObjectHideFlags: 0
