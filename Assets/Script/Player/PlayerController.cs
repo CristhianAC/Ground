@@ -8,16 +8,13 @@ using Unity.Netcode.Components;
 
 public class PlayerController : NetworkBehaviour
 {
-    [Header(" Elements ")]
-    [SerializeField] private SpriteRenderer[] renderers;
+    
 
     Rigidbody2D r2d;
     float moveH;
     [SerializeField] private float velocity;
     [SerializeField] private float jumpForce;
     
-    
-
     private Animator anim; 
     bool _facingRight = true;
 
@@ -26,6 +23,8 @@ public class PlayerController : NetworkBehaviour
     public LayerMask layerMask;
     private bool _isGrounded;
 
+    [Header(" Elements ")]
+    [SerializeField] private SpriteRenderer[] renderers;
 
     public override void OnNetworkSpawn()
     {
@@ -62,7 +61,6 @@ public class PlayerController : NetworkBehaviour
     void Update()
     {
         if (!IsOwner) return;
-
         
         moveH = Input.GetAxis("Horizontal");
         r2d.velocity = new Vector2(moveH*velocity, r2d.velocity.y);
