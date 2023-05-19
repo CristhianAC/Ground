@@ -52,6 +52,7 @@ public class PlayerController : NetworkBehaviour
 
     void Start()
     {
+        if (!IsOwner) return;
         r2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -83,7 +84,8 @@ public class PlayerController : NetworkBehaviour
 
     private void LateUpdate()
     {
-        if(moveH != 0) {
+        if (!IsOwner) return;
+        if (moveH != 0) {
             anim.SetBool("Walking", true);
         }
         else
@@ -94,6 +96,7 @@ public class PlayerController : NetworkBehaviour
     }
     
     void flip() {
+        if (!IsOwner) return;
         _facingRight = !_facingRight;
         float localScaleX = transform.localScale.x;
         localScaleX = localScaleX * -1f;

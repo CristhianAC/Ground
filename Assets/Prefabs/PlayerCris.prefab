@@ -193,12 +193,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 10
   jumpForce: 5
-  anim2: {fileID: 3070387593395931069}
   groundCheck: {fileID: 955055423}
   groundCheckRadius: 0.025
   layerMask:
     serializedVersion: 2
     m_Bits: 64
+  renderers: []
 --- !u!114 &4107353685311248168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -313,7 +313,7 @@ MonoBehaviour:
   SyncScaleZ: 0
   PositionThreshold: 0.001
   RotAngleThreshold: 0.01
-  ScaleThreshold: 0.00001
+  ScaleThreshold: 0.001
   UseQuaternionSynchronization: 0
   UseQuaternionCompression: 0
   UseHalfFloatPrecision: 0
