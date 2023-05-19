@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.Netcode;
 using Mono.Cecil.Cil;
 using Unity.Collections;
+using Unity.Netcode.Components;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -26,8 +27,9 @@ public class PlayerController : NetworkBehaviour
     public float groundCheckRadius;
     public LayerMask layerMask;
     private bool _isGrounded;
-
     
+
+
     void Start()
     {
         r2d = GetComponent<Rigidbody2D>();
@@ -47,28 +49,11 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    public override void OnNetworkSpawn()
-    {
-        randomNumber.OnValueChanged += (MyCustomData previousValue, MyCustomData newValue) =>
-        {
-            Debug.Log(OwnerClientId + "; " + newValue._int + "; " + newValue._bool + "; " + newValue.message);
-        };
-    }
+    
     void Update()
     {
         if (!IsOwner) return;
 
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            TestServerRpc(new ServerRpcParams());
-            /*
-            randomNumber.Value = new MyCustomData { 
-                _int = 10,
-                _bool = false,
-                message = "Me la pelan"
-            };
-            */
-        }
         
         moveH = Input.GetAxis("Horizontal");
         r2d.velocity = new Vector2(moveH*velocity, r2d.velocity.y);
