@@ -36,3 +36,7 @@
 ## Leaderboard 
 - Se la clase LeaderboardManager para acceder y modificar las tablas de clasificación.
 - El asset fue obtenido del siguiente link: https://assetstore.unity.com/packages/tools/utilities/leaderboard-manager-cg-177291
+
+## Materiales de apoyo
+- Dentro de este repositorio podrá encontrar una imagen del diagrama de clases en formato .png.
+- Ademas de la imagen encontrara el codigo de ese diagrama en formato .puml
