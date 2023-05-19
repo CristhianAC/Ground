@@ -189,6 +189,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 10
   jumpForce: 5
+  hostPrefab: {fileID: 492852421921298144}
+  clientPrefab: {fileID: 492852421921298144}
   groundCheck: {fileID: 7597256514906174053}
   groundCheckRadius: 0.025
   layerMask:

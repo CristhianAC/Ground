@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 4107353685311248174}
   - component: {fileID: 4107353685311248173}
   - component: {fileID: 4107353685311248172}
+  - component: {fileID: 2722834605498999074}
   m_Layer: 0
   m_Name: PlayerCris
   m_TagString: Untagged
@@ -276,3 +277,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7c879794dfda4687da0e400131852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2722834605498999074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4107353685311248167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ef1fa0e472f40409c301e0bc87bc42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers: []
